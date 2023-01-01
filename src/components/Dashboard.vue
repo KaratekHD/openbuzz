@@ -37,3 +37,9 @@ function login() {
 
 }
 </script>
+
+<style>
+.text-h2 {
+  margin-bottom: 1rem;
+}
+</style>

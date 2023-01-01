@@ -4,12 +4,8 @@ import {useAuth} from "@/plugins/auth";
 export default {
   answers() {
     const auth = useAuth()
-    const route = '/student-question-answers/stats'
+    const route = '/student-question-answers/stats&learningModeId=1&studentEducationId=' + auth.student.education
     const config = {
-      params: {
-        learningModeId: 1,
-        studentEducationId: auth.student.id,
-      },
       headers: {Authorization: `Bearer ${auth.token}`}
 
     }

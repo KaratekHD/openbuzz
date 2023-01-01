@@ -21,7 +21,8 @@ export const plugin = {
           "firstName": data.student.firstName,
           "lastName": data.student.lastName,
           "email": data.student.learnAppEmail,
-          "id": data.student.id
+          "id": data.student.id,
+          "education": data.student.studentEducationIds[0]
         }
       }
 
