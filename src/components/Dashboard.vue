@@ -4,7 +4,7 @@
       <div class="text-h2">Hallo, {{ auth.student.firstName }} {{ auth.student.lastName }}!</div>
       <v-row>
         <v-col cols="12" md="4">
-          <stats-card />
+          <stats-card @click="router.push('/practice')" />
         </v-col>
       </v-row>
     </div>
@@ -22,11 +22,12 @@ import {useAuth} from "@/plugins/auth";
 import {reactive, ref} from "vue";
 import Login from "@/components/Login.vue";
 import StatsCard from "@/components/Dashboard/StatsCard.vue";
+import {useRouter} from "vue-router";
 
 let auth = reactive(useAuth())
 let authorized = ref(auth.authorized)
 let logindialog = ref(false)
-
+const router = useRouter()
 function authed() {
   logindialog.value = false
   authorized.value = true

@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card @click="emit('click')">
   <v-card-title>Lernstatus</v-card-title>
     <div class="d-flex justify-center">
       <v-progress-circular
@@ -27,6 +27,8 @@ import {onMounted, reactive, ref} from "vue";
 let percentage = ref(0)
 let total = ref(0)
 let statistics = reactive({})
+const emit = defineEmits(['click'])
+
 onMounted(() => {
   stats.answers().then(res => {
     const data = res.data

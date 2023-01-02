@@ -1,0 +1,141 @@
+<template>
+  <v-row v-if="props.question.questionType === 'MULTIPLE_CHOICE'">
+    <v-col v-if="props.question.withPicture" cols="12" md="6">
+      <v-img :src="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id + '/media'"></v-img>
+    </v-col>
+    <v-col v-if="props.question.withVideo" cols="12" md="6">
+      <video class="pointer" style="max-height: 100%; max-width: 100%;"
+             :src="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id +  '/media'"
+             :poster="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id +  '/media?thumbnail=START'" autoplay=""></video>
+    </v-col>
+    <v-col cols="12" md="6">
+      <div class="text-h5">{{ props.question.paragraph.name }} - {{ props.question.officialNumber }} - Punkte :
+        {{ props.question.points }}
+      </div>
+      <v-alert border icon="mdi-help-circle-outline" color="secondary">{{ props.question.title }}</v-alert>
+      <v-form class="answers">
+        <table>
+          <tr v-for="(answer, index) in props.question.options" v-bind:key="index">
+            <td>
+              <v-icon v-if="validated" :color="getCheckColor(index)" size=60 :icon="getCheckType(index)"
+                      class="answer-icon"></v-icon>
+            </td>
+            <td>
+              <v-checkbox v-model="model[index]"
+                          color="primary" class="answer" :label="answer.text"></v-checkbox>
+            </td>
+          </tr>
+        </table>
+      </v-form>
+      <v-row>
+        <v-spacer/>
+        <v-btn :disabled="validated" @click="validateMultipleChoiceQuestion()" color="primary">
+          Überprüfen
+        </v-btn>
+        <v-btn @click="next()" variant="text">Weiter</v-btn>
+      </v-row>
+
+
+    </v-col>
+
+  </v-row>
+  <v-row v-else>
+    <v-btn @click="next()" variant="text">Weiter</v-btn>
+  </v-row>
+</template>
+<script setup>
+import {onMounted, reactive, ref} from "vue";
+import questions from '@/services/questions'
+import {useAuth} from "@/plugins/auth";
+
+const emit = defineEmits(['next'])
+let validated = ref(false)
+const model = reactive([])
+const props = defineProps(['question'])
+let correct_answers = []
+let success = false
+const auth = useAuth()
+
+
+onMounted(() => {
+  for (let i in props.question.options) {
+    model[i] = false
+  }
+})
+
+function validateMultipleChoiceQuestion() {
+  correct_answers = []
+  const correct = props.question.correctAnswer.split(";")
+  let corrects = []
+  for (let i in props.question.options) {
+    if (correct.includes(String(props.question.options[i].position))) {
+      corrects.push(true)
+    } else {
+      corrects.push(false)
+    }
+  }
+  for (let i in model) {
+    if (model[i] === corrects[i]) {
+      correct_answers.push(true)
+    } else {
+      correct_answers.push(false)
+    }
+  }
+  success = !correct_answers.includes(false);
+  validated.value = true
+}
+
+function getCheckType(i) {
+  if (correct_answers[i]) {
+    return "mdi-checkbox-marked-circle-outline"
+  } else {
+    return "mdi-alert-circle-outline"
+  }
+}
+
+function getCheckColor(i) {
+  if (correct_answers[i]) {
+    return "green"
+  } else {
+    return "red"
+  }
+}
+
+function next() {
+  if(validated.value) {
+    questions.sendResult(auth, props.question, success)
+  }
+  validated.value = false
+  model.value = []
+  correct_answers = []
+  success = false
+  emit('next')
+}
+</script>
+
+<style>
+.answer {
+  font-size: 2.5rem;
+}
+
+.v-selection-control__input {
+  font-size: 2.5rem;
+
+}
+
+.answers {
+  margin-top: 1rem;
+}
+
+.v-label {
+  font-size: 1rem;
+  margin-left: 1rem;
+
+}
+
+.answer-icon {
+  position: relative;
+  top: -0.5rem;
+  margin-right: 0.3rem;
+}
+</style>

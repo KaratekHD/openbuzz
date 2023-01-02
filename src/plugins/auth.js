@@ -11,7 +11,6 @@ export const plugin = {
       token: null,
       authorized: false,
       student: {"firstName": "", "lastName": "", "email": "", "id": ""},
-
       login: async function (username, password) {
         let res = await authHelper.login(username, password)
         const data = res.data
