@@ -3,16 +3,16 @@
     <v-col v-if="props.question.withPicture" cols="12" md="6">
       <v-img :src="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id + '/media'"></v-img>
     </v-col>
-    <v-col v-if="props.question.withVideo" cols="12" md="6">
-      <video class="pointer" style="max-height: 100%; max-width: 100%;"
-             :src="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id +  '/media'"
-             :poster="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id +  '/media?thumbnail=START'" autoplay=""></video>
+    <v-col v-if="props.question.withVideo" id="player" cols="12" md="6">
+      <video-player :question="props.question"></video-player>
+
     </v-col>
     <v-col cols="12" md="6">
       <div class="text-h5">{{ props.question.paragraph.name }} - {{ props.question.officialNumber }} - Punkte :
         {{ props.question.points }}
       </div>
       <v-alert border icon="mdi-help-circle-outline" color="secondary">{{ props.question.title }}</v-alert>
+      {{ props.question.additionalText }}
       <v-form class="answers">
         <table>
           <tr v-for="(answer, index) in props.question.options" v-bind:key="index">
@@ -39,14 +39,42 @@
     </v-col>
 
   </v-row>
+  <v-row v-else-if="props.question.questionType === 'FREE_TEXT'">
+    <v-col cols="12" md="6">
+      <div class="text-h5">{{ props.question.paragraph.name }} - {{ props.question.officialNumber }} - Punkte :
+        {{ props.question.points }}
+      </div>
+      <v-alert border icon="mdi-help-circle-outline" color="secondary">{{ props.question.title }}</v-alert>
+      <v-form class="answers">
+        {{ props.question.questionPattern}}
+        <v-row class="freeTextInput">
+        <v-icon v-if="validated" :color="getFreeTextCheckColor()" size=60 :icon="getFreeTextCheckType()"
+                      class="answer-icon-freetext"></v-icon><v-text-field v-model="freetextModel" label="Antwort:"></v-text-field>
+        </v-row>
+        <div v-if="validated" class="freeTextInput">Richtige Antwort: {{ props.question.correctAnswer }}</div>
+
+      </v-form>
+      <v-row class="freeTextInput">
+        <v-spacer />
+        <v-btn :disabled="validated" @click="validateFreeText()" color="primary">
+          Überprüfen
+        </v-btn>
+        <v-btn @click="next()" variant="text">Weiter</v-btn>
+      </v-row>
+    </v-col>
+  </v-row>
   <v-row v-else>
-    <v-btn @click="next()" variant="text">Weiter</v-btn>
+    <v-alert type=error>Der Aufgabentyp {{ props.question.questionType }} kann von OpenBuzz nicht angezeigt werden.
+      <v-btn @click="next()">Weiter</v-btn>
+    </v-alert>
+
   </v-row>
 </template>
 <script setup>
 import {onMounted, reactive, ref} from "vue";
 import questions from '@/services/questions'
 import {useAuth} from "@/plugins/auth";
+import VideoPlayer from "@/components/VideoPlayer.vue";
 
 const emit = defineEmits(['next'])
 let validated = ref(false)
@@ -55,13 +83,20 @@ const props = defineProps(['question'])
 let correct_answers = []
 let success = false
 const auth = useAuth()
+let freetextModel = ref("")
 
 
 onMounted(() => {
-  for (let i in props.question.options) {
-    model[i] = false
+  if (props.question.questionType === 'MULTIPLE_CHOICE') {
+    for (let i in props.question.options) {
+      model[i] = false
+    }
   }
+
+
 })
+
+
 
 function validateMultipleChoiceQuestion() {
   correct_answers = []
@@ -101,8 +136,31 @@ function getCheckColor(i) {
   }
 }
 
+function getFreeTextCheckType(i) {
+  if (success) {
+    return "mdi-checkbox-marked-circle-outline"
+  } else {
+    return "mdi-alert-circle-outline"
+  }
+}
+
+function getFreeTextCheckColor(i) {
+  if (success) {
+    return "green"
+  } else {
+    return "red"
+  }
+}
+function validateFreeText() {
+  if(props.question.correctAnswer === freetextModel.value) {
+    success = true
+  } else {
+    success = false
+  }
+  validated.value = true
+}
 function next() {
-  if(validated.value) {
+  if (validated.value) {
     questions.sendResult(auth, props.question, success)
   }
   validated.value = false
@@ -137,5 +195,10 @@ function next() {
   position: relative;
   top: -0.5rem;
   margin-right: 0.3rem;
+}
+
+.freeTextInput {
+  position: relative;
+  top: 1rem;
 }
 </style>
