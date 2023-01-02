@@ -21,7 +21,7 @@
                       class="answer-icon"></v-icon>
             </td>
             <td>
-              <v-checkbox v-model="model[index]"
+              <v-checkbox :disabled="validated" v-model="model[index]"
                           color="primary" class="answer" :label="answer.text"></v-checkbox>
             </td>
           </tr>
@@ -49,7 +49,7 @@
         {{ props.question.questionPattern}}
         <v-row class="freeTextInput">
         <v-icon v-if="validated" :color="getFreeTextCheckColor()" size=60 :icon="getFreeTextCheckType()"
-                      class="answer-icon-freetext"></v-icon><v-text-field v-model="freetextModel" label="Antwort:"></v-text-field>
+                      class="answer-icon-freetext"></v-icon><v-text-field :disabled="validated" v-model="freetextModel" label="Antwort:"></v-text-field>
         </v-row>
         <div v-if="validated" class="freeTextInput">Richtige Antwort: {{ props.question.correctAnswer }}</div>
 

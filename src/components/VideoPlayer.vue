@@ -4,7 +4,6 @@
 
     </video-player>
 
-    <v-btn @click="test()">Test</v-btn>
   </div>
 </template>
 
