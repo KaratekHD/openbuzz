@@ -33,7 +33,7 @@ onMounted(() => {
   stats.answers().then(res => {
     const data = res.data
     statistics = data
-    total.value = data.remaining + data.readyForExam
+    total.value = data.remaining + data.readyForExam + data.incorrectlyAnswered
     percentage.value = (data.readyForExam / total.value) * 100
   })
 })
