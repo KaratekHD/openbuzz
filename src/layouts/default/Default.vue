@@ -22,12 +22,17 @@
             <v-icon icon="mdi-format-list-checks"/>
           </template>
         </v-list-item>
-
+        <v-list-item rounded href="//github.com/KaratekHD/OpenBuzz" color="primary" title="Quellcode">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-code-tags"/>
+          </template>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <default-bar @customtheme="customTheme()" @toggleDrawer="toggleDrawer()"/>
 
     <default-view/>
+
   </v-app>
 </template>
 

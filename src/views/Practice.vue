@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <v-container>
+  <v-container class="fill-height">
+    <v-responsive class="fill-height">
       <div class="text-h2">Übungsbogen</div>
       <Question @next="nextQuestion()" v-if="loaded" :question="question"/>
-    </v-container>
-  </div>
+
+    </v-responsive>
+
+  </v-container>
 
 </template>
 

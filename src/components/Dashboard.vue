@@ -1,14 +1,15 @@
 <template>
-  <v-container class="fill-height">
-    <div v-if="authorized">
+  <v-container v-if="authorized" class="fill-height">
+    <v-responsive v-if="authorized" class="fill-height">
       <div class="text-h2">Hallo, {{ auth.student.firstName }} {{ auth.student.lastName }}!</div>
       <v-row>
         <v-col cols="12" md="4">
           <stats-card @click="router.push('/practice')"/>
         </v-col>
       </v-row>
-    </div>
-    <div v-else>
+    </v-responsive>
+  </v-container>
+  <v-container v-else>
       <v-dialog fullscreen v-model="logindialog">
         <Login @authed="authed()"/>
       </v-dialog>
@@ -21,7 +22,7 @@
           />
           <p style="margin-top: 1.5rem"><b>OpenBuzz</b> ist ein alternatives Frontend für drive.buzz Artemis.<br>Um es benutzen zu können, musst du dich
             mit deinen drive.buzz Zugangsdaten anmelden.<br>Dies ist ein inoffizielles Projekt und steht in keiner
-            Verbindung zu Fahrschulckckpit</p>
+            Verbindung zu Fahrschulcockpit GmbH.</p>
 
           <div class="py-14"/>
 
@@ -46,7 +47,6 @@
           </v-row>
         </v-responsive>
       </v-container>
-    </div>
   </v-container>
 </template>
 
