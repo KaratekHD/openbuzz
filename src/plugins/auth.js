@@ -12,16 +12,18 @@ export const plugin = {
       authorized: false,
       student: {"firstName": "", "lastName": "", "email": "", "id": ""},
       login: async function (username, password) {
-        let res = await authHelper.login(username, password)
+        const res = await authHelper.login(username, password)
         const data = res.data
         this.token = data.token
+        const educationResult = await authHelper.getEducation(this.token)
+        const educationData = educationResult.data
         this.authorized = true
         this.student = {
           "firstName": data.student.firstName,
           "lastName": data.student.lastName,
           "email": data.student.learnAppEmail,
           "id": data.student.id,
-          "education": data.student.studentEducationIds[0]
+          "education": educationData[0].id
         }
       }
 
