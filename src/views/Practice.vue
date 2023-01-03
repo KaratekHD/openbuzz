@@ -1,7 +1,8 @@
 <template>
   <v-container class="fill-height">
+    <div class="text-h2">Übungsbogen</div>
+
     <v-responsive class="fill-height">
-      <div class="text-h2">Übungsbogen</div>
       <Question @next="nextQuestion()" v-if="loaded" :question="question"/>
 
     </v-responsive>

@@ -11,6 +11,7 @@ export const plugin = {
       token: null,
       authorized: false,
       student: {"firstName": "", "lastName": "", "email": "", "id": ""},
+      raw: null,
       login: async function (username, password) {
         const res = await authHelper.login(username, password)
         const data = res.data
@@ -25,6 +26,7 @@ export const plugin = {
           "id": data.student.id,
           "education": educationData[0].id
         }
+        this.raw = data
       }
 
 

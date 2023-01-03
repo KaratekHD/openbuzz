@@ -1,6 +1,6 @@
 <template>
   <div class="videoplayer">
-    <video-player class="player" controls :responsive="true" :sources="[{'src': 'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id +  '/media', 'type': 'video/mp4'}]" :poster="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id +  '/media?thumbnail=START'">
+    <video-player class="player" muted controls :responsive="true" :sources="[{'src': 'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id +  '/media', 'type': 'video/mp4'}]" :poster="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id +  '/media?thumbnail=START'">
 
     </video-player>
 
