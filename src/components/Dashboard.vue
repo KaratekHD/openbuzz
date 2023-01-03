@@ -3,8 +3,8 @@
     <v-responsive v-if="authorized" class="fill-height">
       <div class="text-h2">Hallo, {{ auth.student.firstName }} {{ auth.student.lastName }}!</div>
       <v-row>
-        <v-col cols="12" md="4">
-          <stats-card @click="router.push('/practice')"/>
+        <v-col cols="12" md="3">
+          <stats-card />
         </v-col>
       </v-row>
     </v-responsive>
