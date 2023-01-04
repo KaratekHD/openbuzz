@@ -22,9 +22,15 @@
             <v-icon icon="mdi-format-list-checks"/>
           </template>
         </v-list-item>
-        <v-list-item rounded href="//github.com/KaratekHD/OpenBuzz" color="primary" title="Quellcode">
+        <v-list-item href="//github.com/KaratekHD/OpenBuzz" color="primary" title="Quellcode">
           <template v-slot:prepend>
             <v-icon icon="mdi-code-tags"/>
+          </template>
+        </v-list-item>
+        <v-divider v-if="auth.authorized" />
+        <v-list-item @click="logout()" color="primary" title="Abmelden">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-logout"/>
           </template>
         </v-list-item>
       </v-list>
@@ -39,7 +45,7 @@
 <script setup>
 import DefaultBar from './AppBar.vue'
 import DefaultView from './View.vue'
-import {onMounted, ref} from "vue";
+import {inject, onMounted, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
 import {useTheme} from "vuetify";
 
@@ -48,7 +54,12 @@ const auth = useAuth()
 let drawer = ref(false)
 const theme = useTheme()
 let useCustomTheme = false
+const cookies = inject("$cookies")
 
+function logout() {
+  cookies.remove("auth")
+  window.location.assign("/")
+}
 function customTheme() {
   useCustomTheme = true
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
