@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import Question from "@/components/Question.vue";
+import Question from "@/components/PracticeQuestion.vue";
 import {onMounted, reactive, ref} from "vue";
 import questions from '@/services/questions'
 import {useAuth} from "@/plugins/auth";

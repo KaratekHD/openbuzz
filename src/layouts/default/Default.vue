@@ -22,6 +22,11 @@
             <v-icon icon="mdi-format-list-checks"/>
           </template>
         </v-list-item>
+        <v-list-item v-if="auth.authorized" to="/exam" color="primary" title="Vorprüfung">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-school"/>
+          </template>
+        </v-list-item>
         <v-list-item rounded href="//github.com/KaratekHD/OpenBuzz" color="primary" title="Quellcode">
           <template v-slot:prepend>
             <v-icon icon="mdi-code-tags"/>
