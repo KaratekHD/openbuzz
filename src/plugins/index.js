@@ -9,6 +9,7 @@ import {loadFonts} from './webfontloader'
 import vuetify from './vuetify'
 import router from '../router'
 import { plugin } from './auth'
+import cookies from 'vue-cookies';
 
 export function registerPlugins(app) {
   loadFonts()
@@ -16,4 +17,5 @@ export function registerPlugins(app) {
     .use(vuetify)
     .use(router)
     .use(plugin)
+    .use(cookies)
 }

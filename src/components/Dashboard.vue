@@ -52,25 +52,32 @@
 
 <script setup>
 import {useAuth} from "@/plugins/auth";
-import {reactive, ref} from "vue";
+import {inject, onMounted, reactive, ref} from "vue";
 import Login from "@/components/Login.vue";
 import StatsCard from "@/components/Dashboard/StatsCard.vue";
-import {useRouter} from "vue-router";
 
 let auth = reactive(useAuth())
 let authorized = ref(auth.authorized)
 let logindialog = ref(false)
-const router = useRouter()
-
+const cookies = inject("$cookies")
 function authed() {
   logindialog.value = false
   authorized.value = true
 }
 
 function login() {
+
   logindialog.value = true
 
 }
+
+onMounted(() => {
+  if(cookies.get("auth") !== null) {
+    auth.loginCookie(cookies.get("auth"))
+    authorized.value = true
+    logindialog.value = false
+  }
+})
 </script>
 
 <style>
