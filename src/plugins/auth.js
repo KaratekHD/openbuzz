@@ -4,7 +4,6 @@ import authHelper from '@/services/auth'
 const injectionKey = Symbol('auth')
 
 export const useAuth = () => inject(injectionKey)
-
 export const plugin = {
   install(app) {
     let auth = {
@@ -27,6 +26,21 @@ export const plugin = {
           "education": educationData[0].id
         }
         this.raw = data
+      },
+      loginCookie: async function (cookie) {
+        console.log("Login with cookie!")
+        const res = await authHelper.getEducation(cookie.token)
+        if (res.status === 200) {
+          this.student = cookie.student
+          this.token = cookie.token
+          this.authorized = true
+          this.raw = cookie.raw
+          return true
+        } else {
+          console.log("Login with cookie failed!")
+          return false
+        }
+
       }
 
 
