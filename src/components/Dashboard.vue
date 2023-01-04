@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="authorized" class="fill-height">
     <v-responsive v-if="authorized" class="fill-height">
-      <div class="text-h2">Hallo, {{ auth.student.firstName }} {{ auth.student.lastName }}!</div>
+      <div class="text-h2">Hallo {{ auth.student.firstName }}!</div>
       <v-row>
         <v-col cols="12" md="3">
           <stats-card/>
