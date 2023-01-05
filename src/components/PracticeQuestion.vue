@@ -1,5 +1,6 @@
 <template>
-  <v-row v-if="props.question.questionType === 'MULTIPLE_CHOICE'">
+<v-container>
+<v-row v-if="props.question.questionType === 'MULTIPLE_CHOICE'">
     <v-col v-if="props.question.withPicture" cols="12" md="6">
       <v-img :src="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id + '/media'"></v-img>
     </v-col>
@@ -29,10 +30,10 @@
       </v-form>
       <v-row>
         <v-spacer/>
-        <v-btn :disabled="validated" @click="validateMultipleChoiceQuestion()" color="primary">
+        <v-btn class="question-button" :disabled="validated" @click="validateMultipleChoiceQuestion()" color="primary">
           Überprüfen
         </v-btn>
-        <v-btn @click="next()" variant="text">Weiter</v-btn>
+        <v-btn class="question-button" @click="next()" variant="text">Weiter</v-btn>
       </v-row>
 
 
@@ -56,19 +57,21 @@
       </v-form>
       <v-row class="freeTextInput">
         <v-spacer />
-        <v-btn :disabled="validated" @click="validateFreeText()" color="primary">
+        <v-btn class="question-button" :disabled="validated" @click="validateFreeText()" color="primary">
           Überprüfen
         </v-btn>
-        <v-btn @click="next()" variant="text">Weiter</v-btn>
+        <v-btn class="question-button" @click="next()" variant="text">Weiter</v-btn>
       </v-row>
     </v-col>
   </v-row>
   <v-row v-else>
     <v-alert type=error>Der Aufgabentyp {{ props.question.questionType }} kann von OpenBuzz nicht angezeigt werden.
-      <v-btn @click="next()">Weiter</v-btn>
+      <v-btn class="question-button" @click="next()">Weiter</v-btn>
     </v-alert>
 
   </v-row>
+</v-container>
+
 </template>
 <script setup>
 import {onMounted, reactive, ref} from "vue";
@@ -79,7 +82,7 @@ import VideoPlayer from "@/components/VideoPlayer.vue";
 const emit = defineEmits(['next'])
 let validated = ref(false)
 const model = reactive([])
-const props = defineProps(['question'])
+const props = defineProps(['question', 'answer'])
 let correct_answers = []
 let success = false
 const auth = useAuth()
@@ -200,5 +203,9 @@ function next() {
 .freeTextInput {
   position: relative;
   top: 1rem;
+}
+
+.question-button {
+  margin-bottom: 1rem;
 }
 </style>
