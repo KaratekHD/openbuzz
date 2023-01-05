@@ -14,7 +14,7 @@
     </div>
     <v-card-text>
       <v-card variant="outlined">
-        <v-card-title style="color: red;">{{
+        <v-card-title style="color: teal;">{{
             total
           }}
         </v-card-title>
@@ -22,7 +22,7 @@
       </v-card>
       <br>
       <v-card variant="outlined">
-        <v-card-title style="color: red;">{{
+        <v-card-title style="color: teal;">{{
             statistics.remaining
           }}
         </v-card-title>
@@ -30,7 +30,7 @@
       </v-card>
       <br>
       <v-card variant="outlined">
-        <v-card-title style="color: red;">{{
+        <v-card-title style="color: teal;">{{
             statistics.readyForExam
           }}
         </v-card-title>
@@ -38,7 +38,7 @@
       </v-card>
       <br>
       <v-card variant="outlined">
-        <v-card-title style="color: red;">{{
+        <v-card-title style="color: teal;">{{
             Math.round((statistics.incorrectlyAnswered / (statistics.incorrectlyAnswered + statistics.readyForExam)) * 100)
           }} %
         </v-card-title>
