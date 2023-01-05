@@ -28,7 +28,7 @@
           </template>
         </v-list-item>
         <v-divider v-if="auth.authorized" />
-        <v-list-item @click="logout()" color="primary" title="Abmelden">
+        <v-list-item @click="logout()" color="primary" title="Abmelden" v-if="auth.authorized">
           <template v-slot:prepend>
             <v-icon icon="mdi-logout"/>
           </template>
