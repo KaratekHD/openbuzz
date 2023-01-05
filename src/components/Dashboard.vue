@@ -6,6 +6,9 @@
         <v-col cols="12" md="3">
           <stats-card/>
         </v-col>
+        <v-col cols="12" md="3">
+          <exams-card/>
+        </v-col>
       </v-row>
     </v-responsive>
   </v-container>
@@ -56,6 +59,7 @@ import {useAuth} from "@/plugins/auth";
 import {inject, onMounted, reactive, ref} from "vue";
 import Login from "@/components/Login.vue";
 import StatsCard from "@/components/Dashboard/StatsCard.vue";
+import ExamsCard from "@/components/Dashboard/ExamsCard.vue";
 
 let auth = reactive(useAuth())
 let authorized = ref(auth.authorized)

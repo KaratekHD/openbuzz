@@ -17,5 +17,12 @@ export default {
     }
     const route = '/theory-pre-exams/add-question-answers/'
     return api().post(route, {"theoryPreExamId": id, "questionAnswers": answers}, config)
+  },
+  getHistory(auth) {
+    const route = "/theory-pre-exams/student/current"
+    const config = {
+      headers: {Authorization: `Bearer ${auth.token}`}
+    }
+    return api().get(route, config)
   }
 }
