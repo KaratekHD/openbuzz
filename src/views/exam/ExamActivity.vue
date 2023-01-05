@@ -45,13 +45,11 @@ onMounted(async () => {
   loaded.value = true
 })
 
-function submit(e) {
+async function submit(e) {
   answers = e
-  examHelper.submitExam(auth, answers, id).then(res => {
-    success.value = res.data
-    submited.value = true
-  })
-
+  const res = await examHelper.submitExam(auth, answers, id)
+  success.value = res.data
+  submited.value = true
 
 }
 </script>
