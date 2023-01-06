@@ -45,6 +45,21 @@
 
     <default-view/>
 
+    <v-bottom-navigation mode="shift" v-if="mobileRef">
+      <v-btn v-model="bottomNav" value="home" to="/" icon color="primary">
+        <v-icon icon="mdi-home"></v-icon>
+        <span>Home</span>
+      </v-btn>
+      <v-btn v-if="auth.authorized" value="practice" to="/practice" icon color="primary">
+        <v-icon icon="mdi-format-list-checks"></v-icon>
+        <span>Übungsbogen</span>
+      </v-btn>
+      <v-btn value="exam" v-if="auth.authorized" to="/exam" icon color="primary">
+        <v-icon icon="mdi-school"></v-icon>
+        <span>Vorprüfung</span>
+      </v-btn>
+    </v-bottom-navigation>
+
   </v-app>
 </template>
 
@@ -53,7 +68,7 @@ import DefaultBar from './AppBar.vue'
 import DefaultView from './View.vue'
 import {inject, onMounted, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
-import {useTheme} from "vuetify";
+import {useDisplay, useTheme} from "vuetify";
 
 const auth = useAuth()
 
@@ -61,6 +76,9 @@ let drawer = ref(false)
 const theme = useTheme()
 let useCustomTheme = false
 const cookies = inject("$cookies")
+let bottomNav = ref(0)
+const { mobile } = useDisplay()
+let mobileRef = ref(mobile)
 
 function logout() {
   cookies.remove("auth")
