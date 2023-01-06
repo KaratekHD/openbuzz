@@ -45,16 +45,16 @@
 
     <default-view/>
 
-    <v-bottom-navigation mode="shift" v-if="mobileRef" flat>
-      <v-btn v-model="bottomNav" value="home" to="/" icon color="primary">
+    <v-bottom-navigation v-if="mobileRef" flat>
+      <v-btn variant="plain" value="home" to="/" icon color="primary">
         <v-icon icon="mdi-home"></v-icon>
         <span>Home</span>
       </v-btn>
-      <v-btn v-if="auth.authorized" value="practice" to="/practice" icon color="primary">
+      <v-btn variant="plain" v-if="auth.authorized" value="practice" to="/practice" icon color="primary">
         <v-icon icon="mdi-format-list-checks"></v-icon>
         <span>Übungsbogen</span>
       </v-btn>
-      <v-btn value="exam" v-if="auth.authorized" to="/exam" icon color="primary">
+      <v-btn variant="plain" value="exam" v-if="auth.authorized" to="/exam" icon color="primary">
         <v-icon icon="mdi-school"></v-icon>
         <span>Vorprüfung</span>
       </v-btn>
