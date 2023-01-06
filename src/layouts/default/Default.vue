@@ -45,7 +45,7 @@
 
     <default-view/>
 
-    <v-bottom-navigation mode="shift" v-if="mobileRef">
+    <v-bottom-navigation mode="shift" v-if="mobileRef" flat>
       <v-btn v-model="bottomNav" value="home" to="/" icon color="primary">
         <v-icon icon="mdi-home"></v-icon>
         <span>Home</span>
@@ -66,11 +66,12 @@
 <script setup>
 import DefaultBar from './AppBar.vue'
 import DefaultView from './View.vue'
-import {inject, onMounted, ref} from "vue";
+import {inject, onMounted, reactive, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
 import {useDisplay, useTheme} from "vuetify";
 
-const auth = useAuth()
+const auth = reactive(useAuth())
+
 
 let drawer = ref(false)
 const theme = useTheme()
