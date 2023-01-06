@@ -4,7 +4,7 @@
     <v-card-text>
       <h1 style="color: green;">{{ success }} / {{ total }}</h1>
       <v-timeline class="timeline" align="start" side="end">
-        <v-timeline-item v-for="exam in exams.slice(0, 3)" :dot-color="getColor(exam)" size="small">
+        <v-timeline-item v-for="exam in exams.slice(0, 4)" :dot-color="getColor(exam)" size="small">
           <span class="text-h6">{{
               new Intl.DateTimeFormat('de-DE', {dateStyle: 'long'}).format(new Date(exam.date))
             }}</span>
