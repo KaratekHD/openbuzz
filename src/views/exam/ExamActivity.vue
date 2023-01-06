@@ -14,7 +14,7 @@
       <div class="text-h2">Prüfungsergebnisse</div>
 
       <v-responsive class="fill-height">
-        <exam-results :success="1" :questions="questions" :answers="answers"/>
+        <exam-results :success="success" :questions="questions" :answers="answers"/>
       </v-responsive>
 
     </v-container>
