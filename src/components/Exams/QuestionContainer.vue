@@ -31,7 +31,7 @@
     </v-card>
     <v-divider/>
     <br>
-    <v-window v-model="model">
+    <v-window touchless v-model="model">
       <v-window-item v-for="(question, index) in props.questions" :key="index">
         <exam-question @back="back" @next="next" @submit="submit" :question="question" :index="index"/>
         <br>
