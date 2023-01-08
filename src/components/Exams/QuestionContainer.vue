@@ -5,7 +5,7 @@
       <v-card>
         <v-card-title>Wirklich abgeben?</v-card-title>
         <v-card-text>
-          <v-alert type="warning">
+          <v-alert v-if="(props.questions.length - answers.length) !== 0" type="warning">
             <b>{{ props.questions.length - answers.length }}</b> Fragen sind noch unbeantwortet.
           </v-alert>
           <br>
