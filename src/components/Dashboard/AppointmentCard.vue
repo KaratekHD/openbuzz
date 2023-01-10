@@ -29,6 +29,7 @@
         <v-card-actions>
             <v-spacer/>
             <v-btn @click="refresh" color="primary">Aktualisieren</v-btn>
+            <v-btn to="/appointments" color="primary">Mehr</v-btn>
         </v-card-actions>
     </v-card>
 </template>
