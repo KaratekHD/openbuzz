@@ -6,6 +6,7 @@
       <v-responsive class="fill-height">
 
         <QuestionContainer @submit="submit" v-if="loaded" :questions="questions"/>
+        <spinner v-else />
 
       </v-responsive>
 
@@ -29,6 +30,7 @@ import examHelper from "@/services/exmas"
 import QuestionContainer from "@/components/Exams/QuestionContainer.vue";
 import ExamResults from "@/components/Exams/ExamResults.vue";
 import {useAuth} from "@/plugins/auth";
+import Spinner from "@/components/spinner.vue";
 
 let loaded = ref(false)
 let questions = reactive([])
