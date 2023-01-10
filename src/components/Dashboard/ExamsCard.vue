@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title>Meine Vorprüfungen</v-card-title>
     <v-card-text>
-      <h1 style="color: green;">{{ success }} / {{ total }}</h1>
+      <div class="text-h4" style="color: green;">{{ success }} / {{ total }}</div>
       <v-timeline class="timeline" align="start" side="end">
         <v-timeline-item v-for="exam in exams.slice(0, 4)" :dot-color="getColor(exam)" size="small">
           <span class="text-h6">{{
