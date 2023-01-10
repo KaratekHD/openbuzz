@@ -20,10 +20,15 @@
                                         Minuten
                                     </v-list-item-subtitle>
                                     <template v-slot:append>
-                                    <span>
+                                    <span v-if="mobileRef">
                                     {{
-                                            Intl.DateTimeFormat('de-DE', {dateStyle: 'long'}).format(new Date(item.date))
+                                            Intl.DateTimeFormat('de-DE', {dateStyle: 'short'}).format(new Date(item.date))
                                         }}</span>
+                                        <span v-else>
+                                        {{
+                                                Intl.DateTimeFormat('de-DE', {dateStyle: 'long'}).format(new Date(item.date))
+                                            }}
+                                        </span>
                                         <span style="margin-left: .5rem;" v-if="item.time !== null"> {{
                                                 item.time
                                             }}</span>
@@ -41,14 +46,21 @@
                                         <v-spacer/>
                                     </template>
                                     <v-list-item-title>{{ item.name }}</v-list-item-title>
-                                    <v-list-item-subtitle v-if="item.duration !== null">Dauer: {{ item.duration }}
+                                    <v-list-item-subtitle v-if="item.duration !== null">
+                                        <div v-if="!mobileRef">Dauer:</div>
+                                        {{ item.duration }}
                                         Minuten
                                     </v-list-item-subtitle>
                                     <template v-slot:append>
-                                    <span>
+                                    <span v-if="mobileRef">
                                     {{
-                                            Intl.DateTimeFormat('de-DE', {dateStyle: 'long'}).format(new Date(item.date))
+                                            Intl.DateTimeFormat('de-DE', {dateStyle: 'short'}).format(new Date(item.date))
                                         }}</span>
+                                        <span v-else>
+                                        {{
+                                                Intl.DateTimeFormat('de-DE', {dateStyle: 'long'}).format(new Date(item.date))
+                                            }}
+                                        </span>
                                         <span style="margin-left: .5rem;" v-if="item.time !== null"> {{
                                                 item.time
                                             }}</span>
@@ -75,12 +87,16 @@ import appointmentHelper from "@/services/appointments";
 import {onMounted, reactive, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
 import Spinner from "@/components/spinner.vue";
+import {useDisplay} from "vuetify";
 
 const auth = useAuth()
 let loaded = ref(false)
 let appointments = reactive([])
 let up = reactive([])
 let done = reactive([])
+
+const {mobile} = useDisplay()
+let mobileRef = ref(mobile)
 
 onMounted(async () => {
     const data = await appointmentHelper.getEvents(auth.token)

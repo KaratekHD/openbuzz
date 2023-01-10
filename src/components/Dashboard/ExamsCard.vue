@@ -13,10 +13,6 @@
 
       </v-timeline>
     </v-card-text>
-    <v-card-actions>
-      <v-spacer/>
-      <v-btn @click="refresh" color="primary" variant="text">Aktualisieren</v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
@@ -30,10 +26,7 @@ let success = ref(0)
 const auth = useAuth()
 let exams = reactive([])
 onMounted(async () => {
-  const response = await examHelper.getHistory(auth)
-  total.value = response.data.length
-  success.value = getSuccess(response.data)
-  exams = response.data
+  await refresh()
 })
 
 function getSuccess(data) {

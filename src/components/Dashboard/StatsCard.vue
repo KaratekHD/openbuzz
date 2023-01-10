@@ -67,16 +67,10 @@ const auth = useAuth()
 const router = useRouter()
 
 onMounted(() => {
-  stats.answers(auth).then(res => {
-    const data = res.data
-    statistics = data
-    total.value = data.remaining + data.readyForExam + data.incorrectlyAnswered
-    percentage.value = (data.readyForExam / total.value) * 100
-  })
+  refresh()
 })
 
 function refresh() {
-  console.log(auth)
   stats.answers(auth).then(res => {
     const data = res.data
     statistics = data
