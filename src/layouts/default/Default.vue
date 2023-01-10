@@ -27,6 +27,11 @@
             <v-icon icon="mdi-school"/>
           </template>
         </v-list-item>
+        <v-list-item v-if="auth.authorized" to="/balance" color="primary" title="Kontoübersicht">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-currency-eur"/>
+          </template>
+        </v-list-item>
         <v-divider/>
         <v-list-item href="//github.com/KaratekHD/OpenBuzz" color="primary" title="Quellcode">
           <template v-slot:prepend>

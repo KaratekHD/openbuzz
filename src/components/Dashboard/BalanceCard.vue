@@ -9,7 +9,7 @@
         <v-card-actions>
       <v-spacer/>
       <v-btn @click="refresh" color="primary" variant="text">Aktualisieren</v-btn>
-      <!--<v-btn to="/balance" color="primary" variant="text">Details</v-btn>-->
+      <v-btn to="/balance" color="primary" variant="text">Details</v-btn>
     </v-card-actions>
     </v-card>
 </template>
