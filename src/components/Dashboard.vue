@@ -65,7 +65,6 @@ import Login from "@/components/Login.vue";
 import StatsCard from "@/components/Dashboard/StatsCard.vue";
 import ExamsCard from "@/components/Dashboard/ExamsCard.vue";
 import BalanceCard from "@/components/Dashboard/BalanceCard.vue";
-import eventHelper from "@/services/appointments"
 import AppointmentCard from "@/components/Dashboard/AppointmentCard.vue";
 
 let auth = reactive(useAuth())

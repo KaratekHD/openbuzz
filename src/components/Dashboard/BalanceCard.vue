@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card v-if="loaded">
         <v-card-title>Kontostand</v-card-title>
         <v-card-text>
             <div :style="'color: ' + color" class="text-h4">
@@ -11,6 +11,10 @@
             <v-btn to="/balance" color="primary" variant="text">Details</v-btn>
         </v-card-actions>
     </v-card>
+    <v-card v-else>
+        <v-card-title>Kontostand</v-card-title>
+        <spinner />
+    </v-card>
 </template>
 
 <script setup>
@@ -18,11 +22,13 @@ import {onMounted, ref} from "vue";
 import balanceHelper from "@/services/balance"
 import {useAuth} from "@/plugins/auth";
 import {useTheme} from "vuetify";
+import Spinner from "@/components/spinner.vue";
 
 let balance = ref(0)
 let color = ref("")
 const auth = useAuth()
 const theme = useTheme()
+let loaded = ref(false)
 
 
 onMounted(async () => {
@@ -30,11 +36,13 @@ onMounted(async () => {
 })
 
 async function refresh() {
+    loaded.value = false
     balance.value = await balanceHelper.calculateTotal(auth.token)
     if (balance.value >= 0) {
         color.value = theme.themes.value[theme.global.name.value].colors.success
     } else {
         color.value = theme.themes.value[theme.global.name.value].colors.error
     }
+    loaded.value = true
 }
 </script>
