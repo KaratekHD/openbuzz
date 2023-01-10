@@ -3,14 +3,15 @@
     <v-responsive v-if="authorized" class="fill-height">
       <div class="text-h2">Hallo {{ auth.student.firstName }}!</div>
       <v-row>
-        <v-col cols="12" md="3">
+        <v-col cols="12" md="4">
           <stats-card/>
         </v-col>
-        <v-col cols="12" md="3">
+        <v-col cols="12" md="4">
           <exams-card/>
         </v-col>
-        <v-col cols="12" md="3">
-          <balance-card/>
+        <v-col cols="12" md="4">
+          <balance-card/><br>
+          <appointment-card />
         </v-col>
       </v-row>
     </v-responsive>
@@ -64,6 +65,8 @@ import Login from "@/components/Login.vue";
 import StatsCard from "@/components/Dashboard/StatsCard.vue";
 import ExamsCard from "@/components/Dashboard/ExamsCard.vue";
 import BalanceCard from "@/components/Dashboard/BalanceCard.vue";
+import eventHelper from "@/services/appointments"
+import AppointmentCard from "@/components/Dashboard/AppointmentCard.vue";
 
 let auth = reactive(useAuth())
 let authorized = ref(auth.authorized)
