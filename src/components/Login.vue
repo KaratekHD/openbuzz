@@ -38,6 +38,7 @@
               />
               Anmelden
             </v-btn>
+            <div>{{error}}</div>
           </v-form>
 
         </v-row>
@@ -47,7 +48,7 @@
 </template>
 
 <script setup>
-import {ref, defineEmits, inject} from "vue";
+import {ref, defineEmits, inject, reactive} from "vue";
 import {useAuth} from "@/plugins/auth";
 
 let password = ref("")
@@ -57,10 +58,14 @@ const emit = defineEmits(['authed'])
 let loading = ref(false)
 const keep_login = ref(false)
 const cookies = inject("$cookies")
-
+let error = reactive({error: null})
 async function signin() {
   loading.value = true
-  await auth.login(email.value, password.value)
+  try {
+      await auth.login(email.value, password.value)
+  } catch(e) {
+      error.error = e
+  }
   if (keep_login.value) {
     cookies.set("auth", auth)
   }
