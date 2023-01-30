@@ -66,6 +66,12 @@ let loaded = ref(false)
 async function refresh() {
     loaded.value = false
     const data = await appointmentHelper.getEvents(auth.token)
+    data.up.sort((a, b) => {
+      const date1 = new Date(a.date);
+      const date2 = new Date(b.date);
+
+      return date1 - date2;
+    })
     const next = data.up[0]
     if (next === undefined) {
         exists.value = false
