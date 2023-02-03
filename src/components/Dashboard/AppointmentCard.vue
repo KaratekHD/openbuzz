@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="loaded">
+    <v-card to="/appointments" v-if="loaded">
         <div v-if="exists">
             <v-card-title>{{ title }}</v-card-title>
             <v-card-subtitle>Dein nächster Termin</v-card-subtitle>
@@ -27,10 +27,6 @@
                     </v-card>
                 </div>
             </v-card-text>
-            <v-card-actions>
-                <v-spacer/>
-                <v-btn to="/appointments" color="primary">Mehr</v-btn>
-            </v-card-actions>
         </div>
         <!--
         <div v-else>

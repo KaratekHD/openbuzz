@@ -1,15 +1,11 @@
 <template>
-    <v-card v-if="loaded">
+    <v-card to="/balance" v-if="loaded">
         <v-card-title>Kontostand</v-card-title>
         <v-card-text>
             <div :style="'color: ' + color" class="text-h4">
                 {{ balance }} €
             </div>
         </v-card-text>
-        <v-card-actions>
-            <v-spacer/>
-            <v-btn to="/balance" color="primary" variant="text">Details</v-btn>
-        </v-card-actions>
     </v-card>
     <v-card v-else>
         <v-card-title>Kontostand</v-card-title>

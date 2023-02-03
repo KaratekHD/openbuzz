@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="loaded">
+    <v-card to="/practice" v-if="loaded">
         <v-card-title>Lernstatus
         </v-card-title>
         <div class="d-flex justify-center">
@@ -46,11 +46,7 @@
             </v-card>
 
         </v-card-text>
-        <v-card-actions>
-            <v-spacer/>
-            <v-btn @click="refresh()" color="primary">Aktualisieren</v-btn>
-            <v-btn @click="router.push('/practice')" color="primary">Üben</v-btn>
-        </v-card-actions>
+
     </v-card>
     <v-card v-else>
         <v-card-title>Lernstatus</v-card-title>

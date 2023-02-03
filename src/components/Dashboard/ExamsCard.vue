@@ -1,5 +1,5 @@
 <template>
-    <v-card v-if="loaded">
+    <v-card to="/exam" v-if="loaded">
         <v-card-title>Vorprüfungen</v-card-title>
         <v-card-text>
             <div class="text-h4" style="color: green;">{{ success }} / {{ total }}</div>
