@@ -21,9 +21,10 @@ onMounted(async () => {
     if (s) {
       console.debug(auth)
     } else {
-
       await router.push("/")
     }
+  } else {
+    await router.push("/")
   }
 })
 
