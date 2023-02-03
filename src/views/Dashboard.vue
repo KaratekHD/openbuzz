@@ -61,7 +61,7 @@
 <script setup>
 import {useAuth} from "@/plugins/auth";
 import {inject, onMounted, reactive, ref} from "vue";
-import Login from "@/components/Login.vue";
+import Login from "@/components/Utils/Login.vue";
 import StatsCard from "@/components/Dashboard/StatsCard.vue";
 import ExamsCard from "@/components/Dashboard/ExamsCard.vue";
 import BalanceCard from "@/components/Dashboard/BalanceCard.vue";

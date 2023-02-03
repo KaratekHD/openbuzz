@@ -89,7 +89,7 @@
 import {onMounted, reactive, ref} from "vue";
 import questions from '@/services/questions'
 import {useAuth} from "@/plugins/auth";
-import VideoPlayer from "@/components/VideoPlayer.vue";
+import VideoPlayer from "@/components/Practice/VideoPlayer.vue";
 
 const emit = defineEmits(['next'])
 let validated = ref(false)

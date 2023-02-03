@@ -24,7 +24,7 @@
 import {onMounted, reactive, ref} from "vue";
 import examHelper from "@/services/exmas"
 import {useAuth} from "@/plugins/auth";
-import Spinner from "@/components/spinner.vue";
+import Spinner from "@/components/Utils/LoadingSpinner.vue";
 
 let total = ref(0)
 let success = ref(0)

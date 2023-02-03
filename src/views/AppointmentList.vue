@@ -85,7 +85,7 @@
 import appointmentHelper from "@/services/appointments";
 import {onMounted, reactive, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
-import Spinner from "@/components/spinner.vue";
+import Spinner from "@/components/Utils/LoadingSpinner.vue";
 import {useDisplay} from "vuetify";
 
 const auth = useAuth()

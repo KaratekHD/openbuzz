@@ -59,7 +59,7 @@ import stats from '@/services/stats'
 import {onMounted, reactive, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
 import {useRouter} from "vue-router";
-import Spinner from "@/components/spinner.vue";
+import Spinner from "@/components/Utils/LoadingSpinner.vue";
 
 let percentage = ref(0)
 let total = ref(0)

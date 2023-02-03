@@ -88,7 +88,7 @@
 <script setup>
 import {onMounted, reactive, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
-import VideoPlayer from "@/components/VideoPlayer.vue";
+import VideoPlayer from "@/components/Practice/VideoPlayer.vue";
 
 const emit = defineEmits(['next', 'back', 'submit'])
 let validated = ref(false)

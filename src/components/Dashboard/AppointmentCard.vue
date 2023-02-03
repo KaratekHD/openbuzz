@@ -49,7 +49,7 @@
 import {useAuth} from "@/plugins/auth";
 import {onMounted, ref} from "vue";
 import appointmentHelper from "@/services/appointments";
-import Spinner from "@/components/spinner.vue";
+import Spinner from "@/components/Utils/LoadingSpinner.vue";
 
 let title = ref("")
 let exists = ref(true)

@@ -59,7 +59,7 @@ import {onMounted, reactive, ref} from "vue";
 import balanceHelper from "@/services/balance"
 import {useAuth} from "@/plugins/auth";
 import {useTheme} from "vuetify";
-import Spinner from "@/components/spinner.vue";
+import Spinner from "@/components/Utils/LoadingSpinner.vue";
 
 let balance = ref(0)
 let color = ref("")

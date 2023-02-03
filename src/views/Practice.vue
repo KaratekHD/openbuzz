@@ -14,11 +14,11 @@
 </template>
 
 <script setup>
-import Question from "@/components/PracticeQuestion.vue";
+import Question from "@/components/Practice/PracticeQuestion.vue";
 import {onMounted, reactive, ref} from "vue";
 import questions from '@/services/questions'
 import {useAuth} from "@/plugins/auth";
-import Spinner from "@/components/spinner.vue";
+import Spinner from "@/components/Utils/LoadingSpinner.vue";
 
 const auth = useAuth()
 let complete = ref(false)
