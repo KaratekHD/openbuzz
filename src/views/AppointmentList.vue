@@ -16,7 +16,7 @@
                                         <v-spacer/>
                                     </template>
                                     <v-list-item-title>{{ item.name }}</v-list-item-title>
-                                    <v-list-item-subtitle v-if="item.duration !== null">Dauer: {{ item.duration }}
+                                    <v-list-item-subtitle v-if="item.duration !== null">{{ item.duration }}
                                         Minuten
                                     </v-list-item-subtitle>
                                     <template v-slot:append>
@@ -47,7 +47,6 @@
                                     </template>
                                     <v-list-item-title>{{ item.name }}</v-list-item-title>
                                     <v-list-item-subtitle v-if="item.duration !== null">
-                                        <div v-if="!mobileRef">Dauer:</div>
                                         {{ item.duration }}
                                         Minuten
                                     </v-list-item-subtitle>
