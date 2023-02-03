@@ -12,7 +12,7 @@
                             <div v-for="(item, index) in up">
                                 <v-list-item>
                                     <template v-slot:prepend="{ prependAvatar }">
-                                        <v-btn color="primary" style="margin-right: 1rem;" :icon="getIcon(item)"/>
+                                        <v-avatar color="primary" style="margin-right: 1rem;" :icon="getIcon(item)"/>
                                         <v-spacer/>
                                     </template>
                                     <v-list-item-title>{{ item.name }}</v-list-item-title>
@@ -42,7 +42,7 @@
                             <div v-for="(item, index) in done">
                                 <v-list-item>
                                     <template v-slot:prepend="{ prependAvatar }">
-                                        <v-btn color="primary" style="margin-right: 1rem;" :icon="getIcon(item)"/>
+                                        <v-avatar color="primary" style="margin-right: 1rem;" :icon="getIcon(item)"/>
                                         <v-spacer/>
                                     </template>
                                     <v-list-item-title>{{ item.name }}</v-list-item-title>

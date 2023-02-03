@@ -37,11 +37,20 @@
             <v-icon icon="mdi-currency-eur"/>
           </template>
         </v-list-item>
+        <v-list-item v-if="auth.authorized" to="/docs" color="primary" title="Dokumente">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-file"/>
+          </template>
+          <template v-slot:append>
+            <v-badge v-if="unread !== 0" inline :content="unread" color="error"/>
+          </template>
+        </v-list-item>
         <v-divider/>
         <v-list-item href="//github.com/KaratekHD/OpenBuzz" color="primary" title="Quellcode">
           <template v-slot:prepend>
             <v-icon icon="mdi-code-tags"/>
           </template>
+
         </v-list-item>
         <v-divider v-if="auth.authorized" />
         <v-list-item @click="logout()" color="primary" title="Abmelden" v-if="auth.authorized">
@@ -51,7 +60,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <default-bar @customtheme="customTheme()" @toggleDrawer="toggleDrawer()"/>
+    <default-bar @customtheme="customTheme()" @toggleDrawer="toggleDrawer()" :unread="unread !== 0"/>
 
     <default-view/>
 
@@ -79,6 +88,7 @@ import DefaultView from './View.vue'
 import {inject, onMounted, reactive, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
 import {useDisplay, useTheme} from "vuetify";
+import docs from "@/services/docs";
 
 const auth = reactive(useAuth())
 
@@ -90,7 +100,7 @@ const cookies = inject("$cookies")
 let bottomNav = ref(0)
 const { mobile } = useDisplay()
 let mobileRef = ref(mobile)
-
+let unread = ref(0)
 function logout() {
   cookies.remove("auth")
   window.location.assign("/")
@@ -105,7 +115,7 @@ function toggleDrawer() {
   drawer.value = !drawer.value
 }
 
-onMounted(() => {
+onMounted(async () => {
   if (!useCustomTheme) {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       theme.global.name.value = "dark"
@@ -116,5 +126,6 @@ onMounted(() => {
       }
     });
   }
+  unread.value = await docs.getUnread(auth.token)
 })
 </script>
