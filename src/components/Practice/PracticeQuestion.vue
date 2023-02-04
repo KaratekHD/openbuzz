@@ -5,9 +5,16 @@
                 <v-img :src="'https://api.fahrschulcockpit.de/theory-questions/' + props.question.id + '/media'"></v-img>
             </v-col>
             <v-col v-if="props.question.withVideo" id="player" cols="12" md="6">
-                <video-player :question="props.question"></video-player>
+              <video-player :question="props.question" @played="amount_video_played = amount_video_played + 1" :question_shown="video_played"></video-player>
             </v-col>
-            <v-col cols="12" md="6">
+          <v-col cols="12" md="6" v-if="props.question.withVideo && !video_played">
+            <v-alert border color="secondary">Bitte sieh dir den Film an, um dich mit der Situation vertraut zu machen.<br>Der Film kann noch <b>{{ 5 - amount_video_played }}</b> Mal angesehen werden.</v-alert>
+            <br>
+            <div class="d-flex justify-center">
+              <v-btn size="large" color="primary" @click="video_played = !video_played">Zur Aufgabenstellung</v-btn>
+            </div>
+          </v-col>
+            <v-col v-else cols="12" md="6">
                 <div class="text-h5">{{ props.question.paragraph.name }} - {{ props.question.officialNumber }} - Punkte
                     :
                     {{ props.question.points }}
@@ -99,6 +106,8 @@ let correct_answers = []
 let success = false
 const auth = useAuth()
 let freetextModel = ref("")
+let video_played = ref(false)
+let amount_video_played = ref(0)
 
 
 onMounted(() => {
