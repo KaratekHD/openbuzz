@@ -3,7 +3,7 @@
 
         <v-responsive class="fill-height">
             <div class="text-h2">Termine</div>
-            <v-container v-if="loaded">
+            <div v-if="loaded">
                 <v-list>
                     <div>
 
@@ -75,7 +75,7 @@
 
                 </v-list>
 
-            </v-container>
+            </div>
             <spinner v-else/>
         </v-responsive>
     </v-container>

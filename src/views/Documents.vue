@@ -5,7 +5,7 @@ Wichtig: Bei ABrufen wird das UI nicht aktualisiert, der rote Punkt bleibt, bis 
 -->
     <v-responsive class="fill-height">
       <div class="text-h2">Dokumente</div>
-      <v-container v-if="loaded">
+      <div v-if="loaded">
         <v-list>
           <div v-for="(item, index) in files">
             <v-list-item :href="'https://api.fahrschulcockpit.de/student-documents/student/current/document/' + item.id + '?token=' + auth.token">
@@ -24,7 +24,7 @@ Wichtig: Bei ABrufen wird das UI nicht aktualisiert, der rote Punkt bleibt, bis 
 
 
         </v-list>
-      </v-container>
+      </div>
       <loading-spinner v-else />
     </v-responsive>
   </v-container>

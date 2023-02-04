@@ -13,7 +13,7 @@
                 </v-card-text>
             </v-card>
             <br>
-            <v-container v-if="loaded">
+            <div v-if="loaded">
                 <v-expansion-panels>
 
                     <v-expansion-panel v-for="(item, index) in payments"
@@ -47,7 +47,7 @@
                         </v-expansion-panel-text>
                     </v-expansion-panel>
                 </v-expansion-panels>
-            </v-container>
+            </div>
             <spinner v-else/>
         </v-responsive>
 
