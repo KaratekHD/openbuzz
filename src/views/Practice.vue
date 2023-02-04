@@ -4,7 +4,7 @@
 
         <v-responsive class="fill-height">
             <v-alert type="success" v-if="complete" title="Glückwunsch!">Du hast keine offenen Fragen mehr.</v-alert>
-            <Question @next="nextQuestion()" v-if="loaded && !complete" :question="question"/>
+            <Question :playground="false" @next="nextQuestion()" v-if="loaded && !complete" :question="question"/>
             <spinner v-if="!loaded"/>
 
         </v-responsive>

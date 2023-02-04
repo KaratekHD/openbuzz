@@ -1,79 +1,84 @@
 <template>
   <v-app>
     <v-navigation-drawer
-      app
-      v-model="drawer"
+        v-model="drawer"
+        app
     >
-      <v-list-item title="OpenBuzz" subtitle="Alternatives Frontend für drive.buzz Artemis"/>
+      <v-list-item subtitle="Alternatives Frontend für drive.buzz Artemis" title="OpenBuzz"/>
       <v-divider/>
 
 
       <v-list
-        dense
-        nav
+          dense
+          nav
       >
-        <v-list-item rounded to="/" color="primary" title="Startseite">
+        <v-list-item color="primary" rounded title="Startseite" to="/">
           <template v-slot:prepend>
             <v-icon icon="mdi-home"/>
           </template>
         </v-list-item>
-        <v-list-item v-if="auth.authorized" to="/practice" color="primary" title="Übungsbogen">
+        <v-list-item v-if="auth.authorized" color="primary" title="Übungsbogen" to="/practice">
           <template v-slot:prepend>
             <v-icon icon="mdi-format-list-checks"/>
           </template>
         </v-list-item>
-        <v-list-item v-if="auth.authorized" to="/exam" color="primary" title="Vorprüfung">
+        <v-list-item v-if="auth.authorized" color="primary" title="Spielwiese" to="/playground">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-teddy-bear"/>
+          </template>
+        </v-list-item>
+        <v-list-item v-if="auth.authorized" color="primary" title="Vorprüfung" to="/exam">
           <template v-slot:prepend>
             <v-icon icon="mdi-school"/>
           </template>
         </v-list-item>
-        <v-list-item v-if="auth.authorized" to="/appointments" color="primary" title="Termine">
+        <v-list-item v-if="auth.authorized" color="primary" title="Termine" to="/appointments">
           <template v-slot:prepend>
             <v-icon icon="mdi-calendar"/>
           </template>
         </v-list-item>
-        <v-list-item v-if="auth.authorized" to="/balance" color="primary" title="Kontoübersicht">
+        <v-list-item v-if="auth.authorized" color="primary" title="Kontoübersicht" to="/balance">
           <template v-slot:prepend>
             <v-icon icon="mdi-currency-eur"/>
           </template>
         </v-list-item>
-        <v-list-item v-if="auth.authorized" to="/docs" color="primary" title="Dokumente">
+        <v-list-item v-if="auth.authorized" color="primary" title="Dokumente" to="/docs">
           <template v-slot:prepend>
             <v-icon icon="mdi-file"/>
           </template>
           <template v-slot:append>
-            <v-badge v-if="unread !== 0" inline :content="unread" color="error"/>
+            <v-badge v-if="unread !== 0" :content="unread" color="error" inline/>
           </template>
         </v-list-item>
         <v-divider/>
-        <v-list-item href="//github.com/KaratekHD/OpenBuzz" color="primary" title="Quellcode">
+        <v-list-item color="primary" href="//github.com/KaratekHD/OpenBuzz" title="Quellcode">
           <template v-slot:prepend>
             <v-icon icon="mdi-code-tags"/>
           </template>
 
         </v-list-item>
-        <v-divider v-if="auth.authorized" />
-        <v-list-item @click="logout()" color="primary" title="Abmelden" v-if="auth.authorized">
+        <v-divider v-if="auth.authorized"/>
+        <v-list-item v-if="auth.authorized" color="primary" title="Abmelden" @click="logout()">
           <template v-slot:prepend>
             <v-icon icon="mdi-logout"/>
           </template>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <default-bar @customtheme="customTheme()" @toggleDrawer="toggleDrawer()" :unread="unread !== 0"/>
+    <default-bar :unread="unread !== 0" @customtheme="customTheme()" @toggleDrawer="toggleDrawer()"/>
 
     <default-view/>
 
     <v-bottom-navigation v-if="mobileRef" flat>
-      <v-btn variant="plain" value="home" to="/" icon color="primary">
+      <v-btn color="primary" icon to="/" value="home" variant="plain">
         <v-icon icon="mdi-home"></v-icon>
         <span>Home</span>
       </v-btn>
-      <v-btn variant="plain" v-if="auth.authorized" value="practice" to="/practice" icon color="primary">
+      <v-btn v-if="auth.authorized" color="primary" icon to="/practice" value="practice" variant="plain">
         <v-icon icon="mdi-format-list-checks"></v-icon>
         <span>Übungsbogen</span>
       </v-btn>
-      <v-btn variant="plain" value="exam" v-if="auth.authorized" to="/exam" icon color="primary">
+      <v-btn v-if="auth.authorized" color="primary" icon to="/exam" value="exam" variant="plain">
         <v-icon icon="mdi-school"></v-icon>
         <span>Vorprüfung</span>
       </v-btn>
@@ -98,9 +103,10 @@ const theme = useTheme()
 let useCustomTheme = false
 const cookies = inject("$cookies")
 let bottomNav = ref(0)
-const { mobile } = useDisplay()
+const {mobile} = useDisplay()
 let mobileRef = ref(mobile)
 let unread = ref(0)
+
 function logout() {
   cookies.remove("auth")
   window.location.assign("/")
