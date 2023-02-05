@@ -57,6 +57,12 @@
           </template>
 
         </v-list-item>
+        <v-list-item color="primary" @click="update()" title="Auf Updates prüfen">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-update"/>
+          </template>
+
+        </v-list-item>
         <v-divider v-if="auth.authorized"/>
         <v-list-item v-if="auth.authorized" color="primary" title="Abmelden" @click="logout()">
           <template v-slot:prepend>
@@ -84,6 +90,20 @@
       </v-btn>
     </v-bottom-navigation>
 
+    <v-dialog :max-width="(mobileRef ? '100%' : '30%')" v-model="updatedialog">
+      <v-card>
+        <v-card-title>Serviceworker aktualisiert.</v-card-title>
+        <v-card-text>
+          Die App muss neu gestartet bzw. die Seite neu geladen werden, damit die Änderungen in Kraft treten.<br>
+          Bitte beachte, dass die Änderungen möglicherweise nicht sichtbar sind.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn color="primary" @click="updatedialog = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </v-app>
 </template>
 
@@ -94,6 +114,7 @@ import {inject, onMounted, reactive, ref} from "vue";
 import {useAuth} from "@/plugins/auth";
 import {useDisplay, useTheme} from "vuetify";
 import docs from "@/services/docs";
+import {useRegisterSW} from "virtual:pwa-register/vue";
 
 const auth = reactive(useAuth())
 
@@ -106,6 +127,13 @@ let bottomNav = ref(0)
 const {mobile} = useDisplay()
 let mobileRef = ref(mobile)
 let unread = ref(0)
+let updatedialog = ref(false)
+
+const {
+  offlineReady,
+  needRefresh,
+  updateServiceWorker,
+} = useRegisterSW()
 
 function logout() {
   cookies.remove("auth")
@@ -134,4 +162,10 @@ onMounted(async () => {
   }
   unread.value = await docs.getUnread(auth.token)
 })
+
+function update() {
+  updateServiceWorker()
+  updatedialog.value = true
+
+}
 </script>
