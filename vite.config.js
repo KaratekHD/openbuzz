@@ -14,10 +14,11 @@ export default defineConfig({
       template: {transformAssetUrls}
     }),
     VitePWA({
-      registerType: 'prompt',
+      registerType: 'autoUpdate',
       devOptions: {
         enabled: true
       },
+      includeAssets: ['assets/*.svg'],
       manifest: {
         name: "OpenBuzz",
         short_name: "OpenBuzz",
