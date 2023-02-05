@@ -31,7 +31,6 @@ export default {
                 total = total - item.amountToPay
             }
         }
-        console.debug(total)
-        return total
+        return total.toFixed(2)
     }
 }
