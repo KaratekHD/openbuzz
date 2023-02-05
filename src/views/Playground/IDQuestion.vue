@@ -5,8 +5,7 @@
       <v-responsive class="fill-height">
         <div class="text-h2">Spielwiese</div>
         <div v-if="loaded">
-          <v-alert type="warning" v-if="questions.length === 0">In dieser Kategorie stehen derzeit keine Fragen zur Verfügung.</v-alert>
-          <Question v-else v-if="loaded && displayed" :playground="false" :question="questions[question]" @next="next()"/>
+          <Question :playground="true" :question="question"/>
         </div>
         <loading-spinner v-else></loading-spinner>
       </v-responsive>
@@ -29,20 +28,17 @@ const auth = useAuth()
 const loaded = ref(false)
 const supported = ref(true)
 const route = useRoute()
-let questions = reactive([])
-const question = ref(0)
+let question = reactive({})
 let displayed = ref(true)
 
 onMounted(async () => {
-  if (!['NEW_QUESTIONS', 'WITH_VIDEO', 'TRAFFIC_SIGNS', 'RIGHT_OF_WAY', 'FREE_TEXT', 'WITH_FORMULA'].includes(route.params.categoryName)) {
-    supported.value = false
-  } else {
-    questions = (await playground.get_questions_by_category(auth.token, route.params.categoryName)).data
-    loaded.value = true
-  }
+  const data = await playground.get_question_by_id(route.params.questionID, auth.student.education, auth.token)
+  question = data.data
+  loaded.value = true
 })
 
 function next() {
+
   question.value++
 }
 </script>

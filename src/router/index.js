@@ -59,6 +59,34 @@ const routes = [
         ],
     },
     {
+        path: '/playground/question/:questionID',
+        component: () => import('@/layouts/default/Default.vue'),
+        children: [
+            {
+                path: '',
+                name: 'Frage nach ID',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () => import(/* webpackChunkName: "home" */ '@/views/Playground/IDQuestion.vue'),
+            },
+        ],
+    },
+    {
+        path: '/playground/search',
+        component: () => import('@/layouts/default/Default.vue'),
+        children: [
+            {
+                path: '',
+                name: 'Suchergebnisse',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () => import(/* webpackChunkName: "home" */ '@/views/Playground/SearchResults.vue'),
+            },
+        ],
+    },
+    {
         path: '/exam',
         component: () => import('@/layouts/default/Default.vue'),
         children: [

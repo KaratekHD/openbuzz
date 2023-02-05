@@ -253,11 +253,6 @@ function submit() {
     font-size: 2.5rem;
 }
 
-.v-selection-control__input {
-    font-size: 2.5rem;
-
-}
-
 .answers {
     margin-top: 1rem;
 }

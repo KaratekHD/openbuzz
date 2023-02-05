@@ -20,7 +20,7 @@
         <br>
         <v-row>
           <v-spacer/>
-          <v-btn class="question-button" variant="text" @click="next()">Weiter</v-btn>
+          <v-btn v-if="!playground" class="question-button" variant="text" @click="next()">Weiter</v-btn>
         </v-row>
       </v-col>
       <v-col v-else cols="12" md="6">
@@ -51,7 +51,7 @@
                  @click="validateMultipleChoiceQuestion()">
             Überprüfen
           </v-btn>
-          <v-btn class="question-button" variant="text" @click="next()">Weiter</v-btn>
+          <v-btn v-if="!playground" class="question-button" variant="text" @click="next()">Weiter</v-btn>
         </v-row>
 
 
@@ -222,11 +222,6 @@ function next() {
 <style>
 .answer {
   font-size: 2.5rem;
-}
-
-.v-selection-control__input {
-  font-size: 2.5rem;
-
 }
 
 .answers {
