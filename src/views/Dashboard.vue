@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="authorized" class="fill-height">
     <v-responsive v-if="authorized" class="fill-height">
-      <div class="text-h2">Hallo {{ auth.student.firstName }}!</div>
+      <div :class="fonthelper.get_header_size()">Hallo {{ auth.student.firstName }}!</div>
       <v-row>
         <v-col cols="12" md="4">
           <stats-card/>
@@ -10,8 +10,9 @@
           <exams-card/>
         </v-col>
         <v-col cols="12" md="4">
-          <balance-card/><br>
-          <appointment-card />
+          <balance-card/>
+          <br>
+          <appointment-card/>
         </v-col>
       </v-row>
     </v-responsive>
@@ -23,9 +24,9 @@
     <v-container class="fill-height">
       <v-responsive class="d-flex align-center text-center fill-height">
         <v-img
-          contain
-          height="300"
-          src="@/assets/logo.svg"
+            contain
+            height="300"
+            src="@/assets/logo.svg"
         />
         <p style="margin-top: 1.5rem"><b>OpenBuzz</b> ist ein alternatives Frontend für drive.buzz Artemis.<br>Um es
           benutzen zu können, musst du dich
@@ -37,16 +38,16 @@
         <v-row class="d-flex align-center justify-center">
           <v-col cols="auto">
             <v-btn
-              color="primary"
-              min-width="228"
-              size="x-large"
-              variant="flat"
-              @click="login()"
+                color="primary"
+                min-width="228"
+                size="x-large"
+                variant="flat"
+                @click="login()"
             >
               <v-icon
-                icon="mdi-key"
-                size="large"
-                start
+                  icon="mdi-key"
+                  size="large"
+                  start
               />
               Anmelden
             </v-btn>
@@ -66,6 +67,7 @@ import StatsCard from "@/components/Dashboard/StatsCard.vue";
 import ExamsCard from "@/components/Dashboard/ExamsCard.vue";
 import BalanceCard from "@/components/Dashboard/BalanceCard.vue";
 import AppointmentCard from "@/components/Dashboard/AppointmentCard.vue";
+import fonthelper from "@/utils/fonthelper";
 
 let auth = reactive(useAuth())
 let authorized = ref(auth.authorized)

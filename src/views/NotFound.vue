@@ -4,7 +4,8 @@
       <v-row>
         <v-col>
           <h1 class="text-h4 error-header">Huch! Irgendetwas ist schief gelaufen.</h1>
-          <p class="error-message">Die Seite, die du angefragt hast, konnten wir auf unseren Servern nicht finden.<br>Hast du dich vielleicht vertippt?
+          <p class="error-message">Die Seite, die du angefragt hast, konnten wir auf unseren Servern nicht finden.<br>Hast
+            du dich vielleicht vertippt?
           </p>
           <div>
 
@@ -14,13 +15,13 @@
                    size="x-large"
                    variant="flat">
               <v-icon
-                icon="mdi-home"
-                size="large"
-                start
+                  icon="mdi-home"
+                  size="large"
+                  start
               />
               <v-tooltip
-                activator="parent"
-                location="bottom"
+                  activator="parent"
+                  location="bottom"
               >Country roads, take me home...
               </v-tooltip>
               Zurück zur Startseite

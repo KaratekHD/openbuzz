@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height">
     <v-responsive class="fill-height">
-      <div class="text-h2">Suchergebnisse</div>
+      <div :class="fonthelper.get_header_size()">Suchergebnisse</div>
       <div v-if="loaded">
         <div><b>{{ data.total }}</b> Suchergebnisse für <i>{{ route.query.query }}</i>:</div>
         <div>
@@ -18,13 +18,13 @@
                   </v-card-text>
 
                 </v-card>
-<br>
+                <br>
               </v-responsive>
             </v-row>
           </v-container>
         </div>
       </div>
-      <loading-spinner v-else />
+      <loading-spinner v-else/>
     </v-responsive>
   </v-container>
 </template>
@@ -35,6 +35,7 @@ import LoadingSpinner from "@/components/Utils/LoadingSpinner.vue";
 import {onMounted, reactive, ref} from "vue";
 import playground from "@/services/playground";
 import {useAuth} from "@/plugins/auth";
+import fonthelper from "@/utils/fonthelper";
 
 const route = useRoute()
 const loaded = ref(false)

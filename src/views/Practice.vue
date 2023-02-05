@@ -1,15 +1,15 @@
 <template>
-    <v-container class="fill-height">
-        <div class="text-h2">Übungsbogen</div>
+  <v-container class="fill-height">
+    <div :class="fonthelper.get_header_size()">Übungsbogen</div>
 
-        <v-responsive class="fill-height">
-            <v-alert type="success" v-if="complete" title="Glückwunsch!">Du hast keine offenen Fragen mehr.</v-alert>
-            <Question :playground="false" @next="nextQuestion()" v-if="loaded && !complete" :question="question"/>
-            <spinner v-if="!loaded"/>
+    <v-responsive class="fill-height">
+      <v-alert type="success" v-if="complete" title="Glückwunsch!">Du hast keine offenen Fragen mehr.</v-alert>
+      <Question :playground="false" @next="nextQuestion()" v-if="loaded && !complete" :question="question"/>
+      <spinner v-if="!loaded"/>
 
-        </v-responsive>
+    </v-responsive>
 
-    </v-container>
+  </v-container>
 
 </template>
 
@@ -19,33 +19,34 @@ import {onMounted, reactive, ref} from "vue";
 import questions from '@/services/questions'
 import {useAuth} from "@/plugins/auth";
 import Spinner from "@/components/Utils/LoadingSpinner.vue";
+import fonthelper from "@/utils/fonthelper";
 
 const auth = useAuth()
 let complete = ref(false)
 let loaded = ref(false)
 let question = reactive({})
 onMounted(async () => {
-    try {
-        const response = await questions.next()
-        console.log(response.data)
-        question = response.data
-    } catch {
-        complete.value = true
-    }
-    loaded.value = true
+  try {
+    const response = await questions.next()
+    console.log(response.data)
+    question = response.data
+  } catch {
+    complete.value = true
+  }
+  loaded.value = true
 
 
 })
 
 async function nextQuestion() {
-    loaded.value = false
-    try {
-        const response = await questions.next()
-        console.log(response.data)
-        question = response.data
-    } catch {
-        complete.value = true
-    }
-    loaded.value = true
+  loaded.value = false
+  try {
+    const response = await questions.next()
+    console.log(response.data)
+    question = response.data
+  } catch {
+    complete.value = true
+  }
+  loaded.value = true
 }
 </script>

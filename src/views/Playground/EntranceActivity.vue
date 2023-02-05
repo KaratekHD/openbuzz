@@ -2,7 +2,7 @@
   <v-container class="fill-height">
 
     <v-responsive class="fill-height">
-      <div class="text-h2">Spielwiese</div>
+      <div :class="fonthelper.get_header_size()">Spielwiese</div>
       <div v-if="loaded">
         <v-row>
           <v-col cols="12" md="4">
@@ -11,11 +11,14 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
-                      :label="searchmode==='1'?'Suchbegriff':'Amtliche Fragennummer'" prepend-inner-icon="mdi-magnify" :rules="[validateSearch]" v-model="searchtext"
+                      :label="searchmode==='1'?'Suchbegriff':'Amtliche Fragennummer'" prepend-inner-icon="mdi-magnify"
+                      :rules="[validateSearch]" v-model="searchtext"
                   ></v-text-field>
                   <v-radio-group mandatory v-model="searchmode">
-                    <v-radio color="primary" class="searchmode-selector" style="font-size: 1rem !important;" label="Schlagwort" value="1"></v-radio>
-                    <v-radio color="primary" class="searchmode-selector" style="font-size: 1rem !important;" label="Amtliche Nummer" value="2"></v-radio>
+                    <v-radio color="primary" class="searchmode-selector" style="font-size: 1rem !important;"
+                             label="Schlagwort" value="1"></v-radio>
+                    <v-radio color="primary" class="searchmode-selector" style="font-size: 1rem !important;"
+                             label="Amtliche Nummer" value="2"></v-radio>
                   </v-radio-group>
                 </v-form>
               </v-card-text>
@@ -90,6 +93,7 @@ import {useAuth} from "@/plugins/auth";
 import {onMounted, reactive, ref} from "vue";
 import playground from "@/services/playground";
 import {useRouter} from "vue-router";
+import fonthelper from "@/utils/fonthelper";
 
 const auth = useAuth()
 let loaded = ref(false)

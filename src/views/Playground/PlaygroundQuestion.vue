@@ -3,10 +3,13 @@
     <v-container class="fill-height">
 
       <v-responsive class="fill-height">
-        <div class="text-h2">Spielwiese</div>
+        <div :class="fonthelper.get_header_size()">Spielwiese</div>
         <div v-if="loaded">
-          <v-alert type="warning" v-if="questions.length === 0">In dieser Kategorie stehen derzeit keine Fragen zur Verfügung.</v-alert>
-          <Question v-else v-if="loaded && displayed" :playground="false" :question="questions[question]" @next="next()"/>
+          <v-alert type="warning" v-if="questions.length === 0">In dieser Kategorie stehen derzeit keine Fragen zur
+            Verfügung.
+          </v-alert>
+          <Question v-else v-if="loaded && displayed" :playground="false" :question="questions[question]"
+                    @next="next()"/>
         </div>
         <loading-spinner v-else></loading-spinner>
       </v-responsive>
@@ -24,6 +27,7 @@ import LoadingSpinner from "@/components/Utils/LoadingSpinner.vue";
 import {onMounted, reactive, ref} from "vue";
 import playground from "@/services/playground";
 import {useAuth} from "@/plugins/auth";
+import fonthelper from "@/utils/fonthelper";
 
 const auth = useAuth()
 const loaded = ref(false)

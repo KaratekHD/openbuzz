@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-container class="fill-height" v-if="!submited">
-      <div class="text-h2">Vorprüfung</div>
+      <div :class="fonthelper.get_header_size()">Vorprüfung</div>
 
       <v-responsive class="fill-height">
 
         <QuestionContainer @submit="submit" v-if="loaded" :questions="questions"/>
-        <spinner v-else />
+        <spinner v-else/>
 
       </v-responsive>
 
@@ -31,6 +31,7 @@ import QuestionContainer from "@/components/Exams/QuestionContainer.vue";
 import ExamResults from "@/components/Exams/ExamResults.vue";
 import {useAuth} from "@/plugins/auth";
 import Spinner from "@/components/Utils/LoadingSpinner.vue";
+import fonthelper from "@/utils/fonthelper";
 
 let loaded = ref(false)
 let questions = reactive([])

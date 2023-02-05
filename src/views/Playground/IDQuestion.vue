@@ -3,7 +3,7 @@
     <v-container class="fill-height">
 
       <v-responsive class="fill-height">
-        <div class="text-h2">Spielwiese</div>
+        <div :class="fonthelper.get_header_size()">Spielwiese</div>
         <div v-if="loaded">
           <Question :playground="true" :question="question"/>
         </div>
@@ -23,6 +23,7 @@ import LoadingSpinner from "@/components/Utils/LoadingSpinner.vue";
 import {onMounted, reactive, ref} from "vue";
 import playground from "@/services/playground";
 import {useAuth} from "@/plugins/auth";
+import fonthelper from "@/utils/fonthelper";
 
 const auth = useAuth()
 const loaded = ref(false)
