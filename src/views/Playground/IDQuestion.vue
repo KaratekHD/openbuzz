@@ -37,11 +37,6 @@ onMounted(async () => {
   question = data.data
   loaded.value = true
 })
-
-function next() {
-
-  question.value++
-}
 </script>
 
 <style scoped>
