@@ -56,6 +56,14 @@
             <v-icon icon="mdi-code-tags"/>
           </template>
 
+
+        </v-list-item>
+        <v-divider/>
+        <v-list-item @click="customTheme()" color="primary" title="Darkmode umschalten">
+          <template v-slot:prepend>
+            <v-icon v-if="theme.global.name.value === 'dark'" icon="mdi-weather-sunny"/>
+            <v-icon v-else icon="mdi-weather-night"/>
+          </template>
         </v-list-item>
         <v-list-item color="primary" @click="update()" title="Auf Updates prüfen">
           <template v-slot:prepend>
@@ -63,7 +71,6 @@
           </template>
 
         </v-list-item>
-        <v-divider v-if="auth.authorized"/>
         <v-list-item v-if="auth.authorized" color="primary" title="Abmelden" @click="logout()">
           <template v-slot:prepend>
             <v-icon icon="mdi-logout"/>
