@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <v-dialog max-width="50%" v-model="submitdialog">
+    <v-dialog :max-width="(mobileRef ? '100%' : '30%')" v-model="submitdialog">
       <v-card>
         <v-card-title>Wirklich abgeben?</v-card-title>
         <v-card-text>
@@ -46,12 +46,15 @@
 
 import ExamQuestion from "@/components/Exams/ExamQuestion.vue";
 import {reactive, ref} from "vue";
+import {useDisplay} from "vuetify";
 
 const props = defineProps(["questions"])
 let model = ref(0)
 let answers = reactive([])
 let submitdialog = ref(false)
 const emit = defineEmits(["submit"])
+const {mobile} = useDisplay()
+let mobileRef = ref(mobile)
 function next(e) {
   if (e.res.answer !== null) {
     answers[e.index] = e.res
