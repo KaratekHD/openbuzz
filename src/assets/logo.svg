@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Copyright (c) 2023 KaratekHD. All rights reserverd.
+  - Use of this source code is governed by a BSD-style license that can be
+  - found in the LICENSE file.
+  - This project is not affiliated with drive.buzz or Fahrschulcockpit.
+  -->
+
 <svg width="256" height="256" version="1.1"
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">

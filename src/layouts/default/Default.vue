@@ -1,3 +1,10 @@
+<!--
+  - Copyright (c) 2023 KaratekHD. All rights reserverd.
+  - Use of this source code is governed by a BSD-style license that can be
+  - found in the LICENSE file.
+  - This project is not affiliated with drive.buzz or Fahrschulcockpit.
+  -->
+
 <template>
   <v-app>
     <v-navigation-drawer
@@ -50,15 +57,7 @@
             <v-badge v-if="unread !== 0" :content="unread" color="error" inline/>
           </template>
         </v-list-item>
-        <v-divider/>
-        <v-list-item color="primary" href="//github.com/KaratekHD/OpenBuzz" title="Quellcode">
-          <template v-slot:prepend>
-            <v-icon icon="mdi-code-tags"/>
-          </template>
 
-
-        </v-list-item>
-        <v-divider/>
         <v-list-item @click="customTheme()" color="primary" title="Darkmode umschalten">
           <template v-slot:prepend>
             <v-icon v-if="theme.global.name.value === 'dark'" icon="mdi-weather-sunny"/>
@@ -69,7 +68,11 @@
           <template v-slot:prepend>
             <v-icon icon="mdi-update"/>
           </template>
-
+        </v-list-item>
+        <v-list-item color="primary" to="/about" title="Über OpenBuzz">
+          <template v-slot:prepend>
+            <v-icon icon="mdi-information"/>
+          </template>
         </v-list-item>
         <v-list-item v-if="auth.authorized" color="primary" title="Abmelden" @click="logout()">
           <template v-slot:prepend>

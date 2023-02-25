@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2023 KaratekHD. All rights reserverd.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ * This project is not affiliated with drive.buzz or Fahrschulcockpit.
+ */
+
 // Composables
 import {createRouter, createWebHistory} from 'vue-router'
 
@@ -139,6 +146,20 @@ const routes = [
                 // this generates a separate chunk (about.[hash].js) for this route
                 // which is lazy-loaded when the route is visited.
                 component: () => import(/* webpackChunkName: "home" */ '@/views/Documents.vue'),
+            },
+        ],
+    },
+    {
+        path: '/about',
+        component: () => import('@/layouts/default/Default.vue'),
+        children: [
+            {
+                path: '',
+                name: 'Über OpenBuzz',
+                // route level code-splitting
+                // this generates a separate chunk (about.[hash].js) for this route
+                // which is lazy-loaded when the route is visited.
+                component: () => import(/* webpackChunkName: "home" */ '@/views/About.vue'),
             },
         ],
     },
