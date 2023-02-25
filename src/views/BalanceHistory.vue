@@ -85,6 +85,12 @@ function getColor(item) {
     return "success"
   }
   if (type === "DRIVING_LESSON" || type === "PRODUCT_BOOKING") {
+    const date = new Date(item.date)
+    const now = new Date()
+    const diff = now.getTime() - date.getTime()
+    if(diff < 0) {
+      return "orange"
+    }
     return "error"
   }
 
@@ -96,7 +102,7 @@ function shouldDisplay(item) {
 }
 
 async function loadBalance() {
-  balance.value = await balanceHelper.calculateTotal(auth.token)
+  balance.value = (await balanceHelper.getSaldo(auth.token, auth.student.education)).data.saldo
   if (balance.value >= 0) {
     color.value = theme.themes.value[theme.global.name.value].colors.success
   } else {

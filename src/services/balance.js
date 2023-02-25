@@ -15,6 +15,13 @@ export default {
         }
         return api().get(endpoint, config)
     },
+    getSaldo(token, id) {
+        const config = {
+            headers: {Authorization: `Bearer ${token}`}
+        }
+        let endpoint = "/balance/student-education/" + id
+        return api().get(endpoint, config)
+    },
     async calculateTotal(token) {
         /*
          *  We could just get this directly from the backend,

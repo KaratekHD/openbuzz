@@ -6,18 +6,18 @@
   -->
 
 <template>
-    <v-card to="/balance" v-if="loaded">
-        <v-card-title>Kontostand</v-card-title>
-        <v-card-text>
-            <div :style="'color: ' + color" class="text-h4">
-                {{ balance }} €
-            </div>
-        </v-card-text>
-    </v-card>
-    <v-card v-else>
-        <v-card-title>Kontostand</v-card-title>
-        <spinner />
-    </v-card>
+  <v-card v-if="loaded" to="/balance">
+    <v-card-title>Kontostand</v-card-title>
+    <v-card-text>
+      <div :style="'color: ' + color" class="text-h4">
+        {{ balance }} €
+      </div>
+    </v-card-text>
+  </v-card>
+  <v-card v-else>
+    <v-card-title>Kontostand</v-card-title>
+    <spinner/>
+  </v-card>
 </template>
 
 <script setup>
@@ -35,17 +35,17 @@ let loaded = ref(false)
 
 
 onMounted(async () => {
-    await refresh()
+  await refresh()
 })
 
 async function refresh() {
-    loaded.value = false
-    balance.value = await balanceHelper.calculateTotal(auth.token)
-    if (balance.value >= 0) {
-        color.value = theme.themes.value[theme.global.name.value].colors.success
-    } else {
-        color.value = theme.themes.value[theme.global.name.value].colors.error
-    }
-    loaded.value = true
+  loaded.value = false
+  balance.value = (await balanceHelper.getSaldo(auth.token, auth.student.education)).data.saldo
+  if (balance.value >= 0) {
+    color.value = theme.themes.value[theme.global.name.value].colors.success
+  } else {
+    color.value = theme.themes.value[theme.global.name.value].colors.error
+  }
+  loaded.value = true
 }
 </script>
