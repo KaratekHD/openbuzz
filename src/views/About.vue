@@ -79,9 +79,6 @@
           Verwendete Bibliotheken
         </v-card-title>
         <v-card-text>
-          <v-alert variant="tonal" type="success" icon="mdi-information">
-            OpenBuzz wurde möglich gemacht durch die Arbeit hunderte freiwilliger, die die Bibliotheken geschrieben haben, die in OpenBuzz genutzt werden.
-          </v-alert>
           <div>
             <v-list>
               <v-list-item v-for="item in libs.sort(compareByTitle)" :href="item.link">
